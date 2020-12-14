@@ -5,7 +5,7 @@ import { TaskContext } from "./contexts/TaskContext";
 
 function App() {
   const { taskList } = useContext(TaskContext);
-  
+
   return (
     <div className="App">
       <h1>Todo, believe or not</h1>
@@ -19,3 +19,9 @@ function App() {
 }
 
 export default App;
+
+/* 
+  Lägg till  Time när man skapar en task
+  Lägg till Prio när man skapar en task
+  ✅Ta bort task!
+*/

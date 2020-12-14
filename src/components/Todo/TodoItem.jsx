@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { TaskContext } from "../../contexts/TaskContext";
 
 const Button = styled.button`
   background-color: yellowgreen;
@@ -16,8 +17,9 @@ const TodoItemWrapper = styled.div`
 `;
 
 const TodoItem = ({
-  todoItem: { priority, dueDate, task, isCompleted: initCompleteStatus },
+  todoItem: { id, priority, dueDate, task, isCompleted: initCompleteStatus },
 }) => {
+  const { taskList, setTaskList } = useContext(TaskContext);
   const [isCompleted, setIsCompleted] = useState(initCompleteStatus);
 
   const handleToggleIsComplete = () => setIsCompleted(!isCompleted);
@@ -36,6 +38,11 @@ const TodoItem = ({
 
   const getLateEmoji = (dueDate) => (isLate(dueDate) ? "🙀" : null);
 
+  const handleDelete = () => {
+    const filteredTodos = taskList.filter((todo) => todo.id !== id);
+    setTaskList(filteredTodos);
+  };
+
   return (
     <TodoItemWrapper>
       <h3>
@@ -49,6 +56,7 @@ const TodoItem = ({
       <Button onClick={handleToggleIsComplete}>
         {isCompleted ? "Done" : "To be done"}
       </Button>
+      <button onClick={handleDelete}>Delete</button>
     </TodoItemWrapper>
   );
 };
