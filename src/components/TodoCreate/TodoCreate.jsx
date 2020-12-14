@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 
 const TodoCreate = () => {
@@ -28,7 +28,12 @@ const TodoCreate = () => {
       priority: 1,
     };
     setTaskList([...taskList, payload]);
+    setTask("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(taskList));
+  }, [taskList]);
 
   return (
     <form onSubmit={handleOnSubmit}>
