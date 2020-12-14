@@ -11,16 +11,29 @@ const TodoCreate = () => {
   const [task, setTask] = useState("");
   const [dateInput, setDateInput] = useState(nowString);
   const [priority, setPriority] = useState(1);
-
+  const [calanderDate, setCalanderDate] = useState(
+    `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+  );
   const handleOnDateChange = (e) => {
     const value = e.target.value;
     setDateInput(value);
+    setCalanderDate(e.target.value);
   };
+
+  // const getDueDate = () =>
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const [year, month, date, hour, minute, second] = dateInput.split("-");
+    const [
+      year,
+      month,
+      date,
+      hour = 0,
+      minute = 0,
+      second = 0,
+    ] = dateInput.split("-");
     const dueDate = new Date(year, month - 1, date, hour, minute, second);
+    setCalanderDate(`${year}-${month}-${date}`);
     const payload = {
       id: Date.now(),
       task,
@@ -28,10 +41,13 @@ const TodoCreate = () => {
       isCompleted: false,
       priority,
     };
-    console.log(payload);
     setTaskList([...taskList, payload]);
     setTask("");
     setPriority(1);
+    setDateInput(nowString);
+    setCalanderDate(
+      `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+    );
   };
 
   useEffect(() => {
@@ -49,7 +65,7 @@ const TodoCreate = () => {
       <input
         type="date"
         placeholder="2020-12-01"
-        value={dateInput}
+        value={calanderDate}
         onChange={handleOnDateChange}
       />
       <input
