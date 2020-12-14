@@ -10,6 +10,7 @@ const TodoCreate = () => {
   }-${now.getDate()}-${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
   const [task, setTask] = useState("");
   const [dateInput, setDateInput] = useState(nowString);
+  const [priority, setPriority] = useState(1);
 
   const handleOnDateChange = (e) => {
     const value = e.target.value;
@@ -25,10 +26,12 @@ const TodoCreate = () => {
       task,
       dueDate,
       isCompleted: false,
-      priority: 1,
+      priority,
     };
+    console.log(payload);
     setTaskList([...taskList, payload]);
     setTask("");
+    setPriority(1);
   };
 
   useEffect(() => {
@@ -48,6 +51,12 @@ const TodoCreate = () => {
         placeholder="2020-12-01"
         value={dateInput}
         onChange={handleOnDateChange}
+      />
+      <input
+        type="text"
+        placeholder="priority"
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
       />
       <button type="submit">Add tast</button>
     </form>
