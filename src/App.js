@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoItem from "./components/Todo/TodoItem";
+import { TaskContext } from "./contexts/TaskContext";
+import TodoCreate from "./components/TodoCreate/TodoCreate";
+
 const todoList = [
   {
     id: 1,
@@ -32,13 +35,19 @@ const todoList = [
 ];
 
 function App() {
+  const [taskList, setTaskList] = useState(todoList);
+
   return (
-    <div className="App">
-      <h1>Todo, believe or not</h1>
-      {todoList.map((todoItem) => (
-        <TodoItem key={todoItem.id} todoItem={todoItem} />
-      ))}
-    </div>
+    <TaskContext.Provider value={{ taskList, setTaskList }}>
+      <div className="App">
+        <h1>Todo, believe or not</h1>
+        <TodoCreate />
+        <hr />
+        {taskList.map((todoItem) => (
+          <TodoItem key={todoItem.id} todoItem={todoItem} />
+        ))}
+      </div>
+    </TaskContext.Provider>
   );
 }
 
