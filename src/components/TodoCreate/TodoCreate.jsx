@@ -3,24 +3,22 @@ import { TaskContext } from "../../contexts/TaskContext";
 
 const TodoCreate = () => {
   const { taskList, setTaskList } = useContext(TaskContext);
-
   const now = new Date();
-  const nowString = `${now.getFullYear()}-${
+  const nowFullTimeString = `${now.getFullYear()}-${
     now.getMonth() + 1
   }-${now.getDate()}-${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
+  const nowShortTimeString = `${now.getFullYear()}-${
+    now.getMonth() + 1
+  }-${now.getDate()}`;
   const [task, setTask] = useState("");
-  const [dateInput, setDateInput] = useState(nowString);
+  const [dateInput, setDateInput] = useState(nowFullTimeString);
   const [priority, setPriority] = useState(1);
-  const [calanderDate, setCalanderDate] = useState(
-    `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
-  );
+  const [calanderDate, setCalanderDate] = useState(nowShortTimeString);
   const handleOnDateChange = (e) => {
     const value = e.target.value;
     setDateInput(value);
     setCalanderDate(e.target.value);
   };
-
-  // const getDueDate = () =>
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -44,10 +42,8 @@ const TodoCreate = () => {
     setTaskList([...taskList, payload]);
     setTask("");
     setPriority(1);
-    setDateInput(nowString);
-    setCalanderDate(
-      `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
-    );
+    setDateInput(nowFullTimeString);
+    setCalanderDate(nowShortTimeString);
   };
 
   useEffect(() => {
