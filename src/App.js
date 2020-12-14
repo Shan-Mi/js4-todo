@@ -21,7 +21,7 @@ function App() {
 export default App;
 
 /* 
-  Lägg till  Time när man skapar en task
+  ✅ Lägg till  Time när man skapar en task
   Lägg till Prio när man skapar en task
-  ✅Ta bort task!
+  ✅ Ta bort task!
 */

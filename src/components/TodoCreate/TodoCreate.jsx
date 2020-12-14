@@ -7,7 +7,7 @@ const TodoCreate = () => {
   const now = new Date();
   const nowString = `${now.getFullYear()}-${
     now.getMonth() + 1
-  }-${now.getDate()}`;
+  }-${now.getDate()}-${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
   const [task, setTask] = useState("");
   const [dateInput, setDateInput] = useState(nowString);
 
@@ -18,8 +18,8 @@ const TodoCreate = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const [year, month, date] = dateInput.split("-");
-    const dueDate = new Date(year, month - 1, date);
+    const [year, month, date, hour, minute, second] = dateInput.split("-");
+    const dueDate = new Date(year, month - 1, date, hour, minute, second);
     const payload = {
       id: Date.now(),
       task,
