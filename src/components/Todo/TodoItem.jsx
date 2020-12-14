@@ -11,11 +11,14 @@ const TodoItem = ({ todoItem }) => {
     return "🎃";
   };
 
+  const isLate = (dueDate) => dueDate < new Date();
+
   return (
     <p>
       {getEmoji(todoItem.priority)}
       {todoItem.task} <br />
       {todoItem.dueDate.toLocaleString()}
+      {isLate(todoItem.dueDate) && <strong> Late</strong>}
     </p>
   );
 };
