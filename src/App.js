@@ -6,7 +6,7 @@ const todoList = [
     task: "Do the Laundry!",
     dueDate: new Date(),
     isCompleted: false,
-    priority: 3,
+    priority: 11,
   },
   {
     id: 2,
@@ -27,18 +27,29 @@ const todoList = [
     task: "Drop garbage!",
     dueDate: new Date(),
     isCompleted: false,
-    priority: 4,
+    priority: 6,
   },
 ];
 
 function App() {
+  const getEmoji = (priority) => {
+    if (priority > 10) {
+      return "⭐️";
+    }
+    if (priority > 5 && priority <= 10) {
+      return "🔔";
+    }
+    return "🎃";
+  };
+
   return (
     <div className="App">
       <h1>Todo, believe or not</h1>
       {todoList.map((todoItem) => (
         <p>
+          {getEmoji(todoItem.priority)}
           {todoItem.task} <br />
-          {todoItem.dueDate.toDateString()}
+          {todoItem.dueDate.toLocaleString()}
         </p>
       ))}
     </div>
