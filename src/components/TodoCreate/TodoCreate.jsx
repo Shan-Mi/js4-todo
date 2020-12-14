@@ -1,28 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { TaskContext } from "../../contexts/TaskContext";
 
 const TodoCreate = () => {
+  const { taskList, setTaskList } = useContext(TaskContext);
+
   const now = new Date();
   const nowString = `${now.getFullYear()}-${
     now.getMonth() + 1
   }-${now.getDate()}`;
-  const [textInput, setTextInput] = useState("");
+  const [task, setTask] = useState("");
   const [dateInput, setDateInput] = useState(nowString);
 
   const handleOnDateChange = (e) => {
     const value = e.target.value;
     setDateInput(value);
-    const [year, month, date] = value.split("-");
-    const newDate = new Date(year, month - 1, date);
-    console.log(newDate.toDateString());
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const [year, month, date] = dateInput.split("-");
+    const dueDate = new Date(year, month - 1, date);
+    const payload = {
+      id: Date.now(),
+      task,
+      dueDate,
+      isCompleted: false,
+      priority: 1,
+    };
+    setTaskList([...taskList, payload]);
   };
 
   return (
-    <form>
+    <form onSubmit={handleOnSubmit}>
       <input
         type="text"
         placeholder="new todo"
-        value={textInput}
-        onChange={(e) => setTextInput(e.target.value)}
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
       />
       <input
         type="date"
@@ -30,6 +44,7 @@ const TodoCreate = () => {
         value={dateInput}
         onChange={handleOnDateChange}
       />
+      <button type="submit">Add tast</button>
     </form>
   );
 };
