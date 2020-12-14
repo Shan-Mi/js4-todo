@@ -36,7 +36,10 @@ function App() {
     <div className="App">
       <h1>Todo, believe or not</h1>
       {todoList.map((todoItem) => (
-        <p>{todoItem.task}</p>
+        <p>
+          {todoItem.task} <br />
+          {todoItem.dueDate.toDateString()}
+        </p>
       ))}
     </div>
   );
