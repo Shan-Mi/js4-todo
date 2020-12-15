@@ -26,6 +26,10 @@ const TodoCreate = () => {
     setCalanderDate(e.target.value)
   }
 
+  const handleOnTimeChange = (e) => {
+    e.preventDefault()
+    setTime(e.target.value)
+  }
   const handleOnSubmit = (e) => {
     e.preventDefault()
     let [year, month, date, hour, minute, second] = dateInput.split("-")
@@ -48,10 +52,6 @@ const TodoCreate = () => {
     setCalanderDate(nowShortTimeString)
   }
 
-  const handleOnTimeChange = (e) => {
-    e.preventDefault()
-    setTime(e.target.value)
-  }
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(taskList))

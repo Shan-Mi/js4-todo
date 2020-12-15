@@ -41,7 +41,16 @@ const TodoItem = ({
 
   const [isCompleted, setIsCompleted] = useState(initCompleteStatus)
 
-  const handleToggleIsComplete = () => setIsCompleted(!isCompleted)
+  const handleToggleIsComplete = (e) => {
+    setIsCompleted(!isCompleted)
+    const newTaskList = taskList.map((task) => {
+      if (task.id === id) {
+        return { ...task, isCompleted: !isCompleted }
+      }
+      return task
+    })
+    localStorage.setItem("todos", JSON.stringify(newTaskList))
+  }
 
   const getEmoji = (priority) => {
     if (priority >= 50) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import TodoItem from "./components/Todo/TodoItem"
 import TodoCreate from "./components/Todo/TodoCreate"
 import TaskContext from "./contexts/TaskContext"
@@ -28,8 +28,17 @@ function App() {
     },
   ]
 
-  const [taskList, setTaskList] = useState(todoList)
+  // const [taskList, setTaskList] = useState(todoList)
+  const intialState = localStorage.hasOwnProperty("todos")
+    ? JSON.parse(localStorage.getItem("todos"))
+    : todoList
 
+  const [taskList, setTaskList] = useState(intialState)
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(taskList))
+  }, [taskList])
+  
   return (
     <TaskContext.Provider value={{ taskList, setTaskList }}>
       <div className="App">
