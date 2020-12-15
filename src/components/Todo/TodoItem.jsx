@@ -22,6 +22,13 @@ const Button = styled.button`
     }
   }
 `
+const TodoTextWrapper = styled.h3`
+  &.done {
+    text-decoration: line-through;
+    font-style: italic;
+    color: darkgrey;
+  }
+`
 
 const TodoItemWrapper = styled.div`
   padding: 1rem 3rem;
@@ -60,10 +67,10 @@ const TodoItem = ({
 
   return (
     <TodoItemWrapper>
-      <h3>
+      <TodoTextWrapper className={isCompleted ? "done" : ""}>
         {getEmoji(priority)}
         {task}
-      </h3>
+      </TodoTextWrapper>
       <p>
         {getLateEmoji(dueDate)}
         {dueDate.toLocaleString()}
