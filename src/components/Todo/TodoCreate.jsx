@@ -1,5 +1,31 @@
 import React, { useContext, useState, useEffect } from "react"
 import TaskContext from "../../contexts/TaskContext"
+import styled from "styled-components"
+
+const InputWrapper = styled.input`
+  padding: 5px;
+  width: 100%;
+  max-width: 200px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: solid 1px #5faaec;
+`
+
+const AddBtn = styled.button`
+  padding: 7px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  background-color: grey;
+  color: white;
+  font-weight: bold;
+`
+const FormWrapper = styled.form`
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  padding-left: 3rem;
+`
 
 const TodoCreate = () => {
   const { taskList, setTaskList } = useContext(TaskContext)
@@ -52,39 +78,38 @@ const TodoCreate = () => {
     setCalanderDate(nowShortTimeString)
   }
 
-
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(taskList))
   }, [taskList])
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <input
+    <FormWrapper onSubmit={handleOnSubmit}>
+      <InputWrapper
         type="text"
         placeholder="New Todo"
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <input
+      <InputWrapper
         type="date"
         placeholder="2020-12-01"
         value={calanderDate}
         onChange={handleOnDateChange}
       />
-      <input
+      <InputWrapper
         type="time"
         placeholder="12:30"
         value={time}
         onChange={handleOnTimeChange}
       />
-      <input
+      <InputWrapper
         type="text"
         placeholder="priority"
         value={priority}
         onChange={(e) => setPriority(e.target.value)}
       />
-      <button type="submit">Add tast</button>
-    </form>
+      <AddBtn type="submit">Add tast</AddBtn>
+    </FormWrapper>
   )
 }
 

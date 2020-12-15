@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react"
 import TodoItem from "./components/Todo/TodoItem"
 import TodoCreate from "./components/Todo/TodoCreate"
 import TaskContext from "./contexts/TaskContext"
+import styled from "styled-components"
+
+const TitleWrapper = styled.h1`
+  text-align: center;
+`
 
 function App() {
   const todoList = [
@@ -38,11 +43,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(taskList))
   }, [taskList])
-  
+
   return (
     <TaskContext.Provider value={{ taskList, setTaskList }}>
       <div className="App">
-        <h1>Todo, believe or not</h1>
+        <TitleWrapper>Todo, believe or not</TitleWrapper>
         <TodoCreate />
         <hr />
         {taskList.map((todoItem) => (
@@ -54,9 +59,3 @@ function App() {
 }
 
 export default App
-
-/* 
-  ✅ Lägg till  Time när man skapar en task
-  ✅ Lägg till Prio när man skapar en task
-  ✅ Ta bort task!
-*/

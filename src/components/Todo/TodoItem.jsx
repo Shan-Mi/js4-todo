@@ -3,18 +3,29 @@ import styled from "styled-components"
 import TaskContext from "../../contexts/TaskContext"
 
 const Button = styled.button`
-  background-color: yellowgreen;
+  background-color: #63b9ec;
   padding: 10px;
   border: none;
   display: inline-block;
   width: 40vw;
   max-width: 300px;
   font-weight: bold;
+  cursor: pointer;
+  &.done {
+    background-color: #20c42a;
+  }
+
+  &:hover {
+    color: white;
+    background-color: #63ecb9;
+    transition: all 0.3s ease-in-out;
+  }
 
   &.delete {
-    background-color: red;
+    background-color: #ff5959;
     width: 80px;
     cursor: pointer;
+
     &:hover {
       color: white;
       background-color: darkred;
@@ -84,7 +95,10 @@ const TodoItem = ({
         {getLateEmoji(dueDate)}
         {dueDate.toLocaleString()}
       </p>
-      <Button onClick={handleToggleIsComplete}>
+      <Button
+        className={isCompleted ? "done" : ""}
+        onClick={handleToggleIsComplete}
+      >
         {isCompleted ? "Done" : "To be done"}
       </Button>
       <Button className="delete" onClick={handleDelete}>
