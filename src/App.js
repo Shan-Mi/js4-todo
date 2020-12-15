@@ -1,24 +1,50 @@
-import React, { useContext } from "react";
-import TodoItem from "./components/Todo/TodoItem";
-import TodoCreate from "./components/TodoCreate/TodoCreate";
-import { TaskContext } from "./contexts/TaskContext";
+import React, { useState } from "react"
+import TodoItem from "./components/Todo/TodoItem"
+import TodoCreate from "./components/Todo/TodoCreate"
+import TaskContext from "./contexts/TaskContext"
 
 function App() {
-  const { taskList } = useContext(TaskContext);
+  const todoList = [
+    {
+      id: 1,
+      task: "Do the laundry!",
+      dueDate: new Date(2020, 11, 14, 10, 30),
+      isCompleted: false,
+      priority: 11,
+    },
+    {
+      id: 2,
+      task: "Do the dishes!",
+      dueDate: new Date(2020, 11, 14, 11, 0),
+      isCompleted: true,
+      priority: 10,
+    },
+    {
+      id: 3,
+      task: "Make the bed",
+      dueDate: new Date(2020, 11, 14, 6, 30),
+      isCompleted: false,
+      priority: 1,
+    },
+  ]
+
+  const [taskList, setTaskList] = useState(todoList)
 
   return (
-    <div className="App">
-      <h1>Todo, believe or not</h1>
-      <TodoCreate />
-      <hr />
-      {taskList.map((todoItem) => (
-        <TodoItem key={todoItem.id} todoItem={todoItem} />
-      ))}
-    </div>
-  );
+    <TaskContext.Provider value={{ taskList, setTaskList }}>
+      <div className="App">
+        <h1>Todo, believe or not</h1>
+        <TodoCreate />
+        <hr />
+        {taskList.map((todoItem) => (
+          <TodoItem key={todoItem.id} todoItem={todoItem} />
+        ))}
+      </div>
+    </TaskContext.Provider>
+  )
 }
 
-export default App;
+export default App
 
 /* 
   ✅ Lägg till  Time när man skapar en task

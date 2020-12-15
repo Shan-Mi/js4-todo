@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
-import { TaskContext } from "../../contexts/TaskContext";
+import React, { useState, useContext } from "react"
+import styled from "styled-components"
+import TaskContext from "../../contexts/TaskContext"
 
 const Button = styled.button`
   background-color: yellowgreen;
@@ -10,38 +10,42 @@ const Button = styled.button`
   width: 40vw;
   max-width: 300px;
   font-weight: bold;
-`;
+`
 
 const TodoItemWrapper = styled.div`
   padding: 1rem 3rem;
-`;
+`
 
 const TodoItem = ({
   todoItem: { id, priority, dueDate, task, isCompleted: initCompleteStatus },
 }) => {
-  const { taskList, setTaskList } = useContext(TaskContext);
-  const [isCompleted, setIsCompleted] = useState(initCompleteStatus);
+  const { taskList, setTaskList } = useContext(TaskContext)
 
-  const handleToggleIsComplete = () => setIsCompleted(!isCompleted);
+  const [isCompleted, setIsCompleted] = useState(initCompleteStatus)
+
+  const handleToggleIsComplete = () => setIsCompleted(!isCompleted)
 
   const getEmoji = (priority) => {
+    if (priority >= 50) {
+      return "💖"
+    }
     if (priority > 10) {
-      return "⭐️";
+      return "⭐️"
     }
     if (priority > 5 && priority <= 10) {
-      return "🔔";
+      return "🔔"
     }
-    return "🎃";
-  };
+    return "🎃"
+  }
 
-  const isLate = (dueDate) => dueDate < new Date();
+  const isLate = (dueDate) => dueDate < new Date()
 
-  const getLateEmoji = (dueDate) => (isLate(dueDate) ? "🙀" : null);
+  const getLateEmoji = (dueDate) => (isLate(dueDate) ? "🙀" : null)
 
   const handleDelete = () => {
-    const filteredTodos = taskList.filter((todo) => todo.id !== id);
-    setTaskList(filteredTodos);
-  };
+    const filteredTodos = taskList.filter((todo) => todo.id !== id)
+    setTaskList(filteredTodos)
+  }
 
   return (
     <TodoItemWrapper>
@@ -58,7 +62,7 @@ const TodoItem = ({
       </Button>
       <button onClick={handleDelete}>Delete</button>
     </TodoItemWrapper>
-  );
-};
+  )
+}
 
-export default TodoItem;
+export default TodoItem

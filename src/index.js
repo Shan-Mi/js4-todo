@@ -2,14 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import GlobalContext from "./contexts/TaskContext";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalContext>
-      <App />
-    </GlobalContext>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
