@@ -3,6 +3,7 @@ import TaskContext from "../../contexts/TaskContext"
 
 const TodoCreate = () => {
   const { taskList, setTaskList } = useContext(TaskContext)
+  const pad = (num) => (num > 9 ? num : `0${num}`)
   const now = new Date()
   const nowFullTimeString = `${now.getFullYear()}-${
     now.getMonth() + 1
@@ -10,10 +11,15 @@ const TodoCreate = () => {
   const nowShortTimeString = `${now.getFullYear()}-${
     now.getMonth() + 1
   }-${now.getDate()}`
+  const nowTimeString = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(
+    now.getSeconds()
+  )}`
   const [task, setTask] = useState("")
   const [dateInput, setDateInput] = useState(nowFullTimeString)
-  const [priority, setPriority] = useState(1)
   const [calanderDate, setCalanderDate] = useState(nowShortTimeString)
+  const [time, setTime] = useState(nowTimeString)
+  const [priority, setPriority] = useState(1)
+
   const handleOnDateChange = (e) => {
     const value = e.target.value
     setDateInput(value)
@@ -22,14 +28,10 @@ const TodoCreate = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    const [
-      year,
-      month,
-      date,
-      hour = 0,
-      minute = 0,
-      second = 0,
-    ] = dateInput.split("-")
+    let [year, month, date, hour, minute, second] = dateInput.split("-")
+    const timeArr = time.split(":")
+    hour = timeArr[0]
+    minute = timeArr[1]
     const dueDate = new Date(year, month - 1, date, hour, minute, second)
     setCalanderDate(`${year}-${month}-${date}`)
     const payload = {
@@ -46,6 +48,11 @@ const TodoCreate = () => {
     setCalanderDate(nowShortTimeString)
   }
 
+  const handleOnTimeChange = (e) => {
+    e.preventDefault()
+    setTime(e.target.value)
+  }
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(taskList))
   }, [taskList])
@@ -54,7 +61,7 @@ const TodoCreate = () => {
     <form onSubmit={handleOnSubmit}>
       <input
         type="text"
-        placeholder="new todo"
+        placeholder="New Todo"
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
@@ -63,6 +70,12 @@ const TodoCreate = () => {
         placeholder="2020-12-01"
         value={calanderDate}
         onChange={handleOnDateChange}
+      />
+      <input
+        type="time"
+        placeholder="12:30"
+        value={time}
+        onChange={handleOnTimeChange}
       />
       <input
         type="text"

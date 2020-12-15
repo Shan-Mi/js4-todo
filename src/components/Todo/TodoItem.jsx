@@ -10,6 +10,17 @@ const Button = styled.button`
   width: 40vw;
   max-width: 300px;
   font-weight: bold;
+
+  &.delete {
+    background-color: red;
+    width: 80px;
+    cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: darkred;
+      transition: all 0.3s ease-in-out;
+    }
+  }
 `
 
 const TodoItemWrapper = styled.div`
@@ -60,7 +71,9 @@ const TodoItem = ({
       <Button onClick={handleToggleIsComplete}>
         {isCompleted ? "Done" : "To be done"}
       </Button>
-      <button onClick={handleDelete}>Delete</button>
+      <Button className="delete" onClick={handleDelete}>
+        Delete
+      </Button>
     </TodoItemWrapper>
   )
 }
