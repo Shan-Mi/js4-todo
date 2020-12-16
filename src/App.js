@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react"
 import TodoItem from "./components/Todo/TodoItem"
 import TodoCreate from "./components/Todo/TodoCreate"
 import TaskContext from "./contexts/TaskContext"
-import styled from "styled-components"
-
-const TitleWrapper = styled.h1`
-  text-align: center;
-`
 
 function App() {
   const todoList = [
@@ -33,7 +28,6 @@ function App() {
     },
   ]
 
-  // const [taskList, setTaskList] = useState(todoList)
   const intialState = localStorage.hasOwnProperty("todos")
     ? JSON.parse(localStorage.getItem("todos"))
     : todoList
@@ -46,10 +40,12 @@ function App() {
 
   return (
     <TaskContext.Provider value={{ taskList, setTaskList }}>
-      <div className="">
-        <TitleWrapper>Todo, believe or not</TitleWrapper>
+      <div className="min-h-screen bg-gray-400 overflow-x-hidden">
+        <h1 className="text-black text-3xl text-center py-10">
+          Todo, believe or not
+        </h1>
         <TodoCreate />
-        <hr />
+
         {taskList.map((todoItem) => (
           <TodoItem key={todoItem.id} todoItem={todoItem} />
         ))}

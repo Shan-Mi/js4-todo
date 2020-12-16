@@ -1,31 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
 import TaskContext from "../../contexts/TaskContext"
-import styled from "styled-components"
-
-const InputWrapper = styled.input`
-  padding: 5px;
-  width: 100%;
-  max-width: 200px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  border: solid 1px #5faaec;
-`
-
-const AddBtn = styled.button`
-  padding: 7px;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 5px;
-  background-color: grey;
-  color: white;
-  font-weight: bold;
-`
-const FormWrapper = styled.form`
-  display: flex;
-  justify-content: space-between;
-  max-width: 1000px;
-  padding-left: 3rem;
-`
 
 const TodoCreate = () => {
   const { taskList, setTaskList } = useContext(TaskContext)
@@ -83,33 +57,44 @@ const TodoCreate = () => {
   }, [taskList])
 
   return (
-    <FormWrapper onSubmit={handleOnSubmit}>
-      <InputWrapper
-        type="text"
-        placeholder="New Todo"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <InputWrapper
-        type="date"
-        placeholder="2020-12-01"
-        value={calanderDate}
-        onChange={handleOnDateChange}
-      />
-      <InputWrapper
-        type="time"
-        placeholder="12:30"
-        value={time}
-        onChange={handleOnTimeChange}
-      />
-      <InputWrapper
-        type="text"
-        placeholder="priority"
-        value={priority}
-        onChange={(e) => setPriority(e.target.value)}
-      />
-      <AddBtn type="submit">Add tast</AddBtn>
-    </FormWrapper>
+    <div className="flex justify-start px-12">
+      <form className="flex justify-start w-full h-8" onSubmit={handleOnSubmit}>
+        <input
+          className="w-2/5 bg-red-600 mr-2 rounded-md pl-3"
+          type="text"
+          placeholder="New Todo"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <input
+          className="w-50 xl:w-60 bg-red-300 mx-2 rounded-md pl-3"
+          type="date"
+          placeholder="2020-12-01"
+          value={calanderDate}
+          onChange={handleOnDateChange}
+        />
+        <input
+          className="w-50 xl:w-60 bg-yellow-600 mx-2 rounded-md pl-3"
+          type="time"
+          placeholder="12:30"
+          value={time}
+          onChange={handleOnTimeChange}
+        />
+        <input
+          className="w-1/5 xl:w-60 ml-2 rounded-md pl-3"
+          type="text"
+          placeholder="priority"
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+        />
+        <button
+          className="bg-green-300 ml-2 w-24 rounded-md text-white"
+          type="submit"
+        >
+          Add tast
+        </button>
+      </form>
+    </div>
   )
 }
 
