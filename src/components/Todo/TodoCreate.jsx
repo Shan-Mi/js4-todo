@@ -60,7 +60,7 @@ const TodoCreate = () => {
     <div className="flex justify-start px-12">
       <form className="flex justify-start w-full h-8" onSubmit={handleOnSubmit}>
         <input
-          className="w-2/5 bg-red-600 mr-2 rounded-md pl-3"
+          className="w-2/5 bg-red-600 mr-2 rounded-md pl-3 h-8"
           type="text"
           placeholder="New Todo"
           value={task}
