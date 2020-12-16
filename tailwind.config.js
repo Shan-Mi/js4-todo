@@ -11,6 +11,7 @@ module.exports = {
       "2xl": "1536px",
     },
     fontFamily: {
+      title: ["Bungee Outline", "cursive"],
       sans: [
         "ui-sans-serif",
         "system-ui",

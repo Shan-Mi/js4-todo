@@ -41,7 +41,7 @@ function App() {
   return (
     <TaskContext.Provider value={{ taskList, setTaskList }}>
       <div className="min-h-screen bg-gray-400 overflow-x-hidden">
-        <h1 className="text-black text-3xl text-center py-10">
+        <h1 className="text-black text-4xl text-center py-10 font-title">
           Todo, believe or not
         </h1>
         <TodoCreate />
