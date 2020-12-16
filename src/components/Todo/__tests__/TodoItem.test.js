@@ -158,6 +158,4 @@ describe("Tests task Item", () => {
     })
     expect(container.textContent).toContain("To be done")
   })
-
-  
 })

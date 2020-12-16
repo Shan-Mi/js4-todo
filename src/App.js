@@ -46,7 +46,7 @@ function App() {
 
   return (
     <TaskContext.Provider value={{ taskList, setTaskList }}>
-      <div className="App">
+      <div className="">
         <TitleWrapper>Todo, believe or not</TitleWrapper>
         <TodoCreate />
         <hr />
